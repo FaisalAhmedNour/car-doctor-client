@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
-// import googleIcon from '../../assets/icons/' 
 
 const Login = () => {
 
@@ -13,7 +12,7 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        // console.log(email, password)
         form.reset()
 
         SignInWithEmailPassword(email, password)
