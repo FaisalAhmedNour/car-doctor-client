@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
 
-    const { SignInWithEmailPassword } = useContext(AuthContext);
+    const { SignInWithEmailPassword, setLoading, setUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation()
+    console.log(location);
+    const from = location.state?.from.pathname || '/';
+    console.log(from)
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -19,6 +25,9 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user)
+            setUser(user)
+            setLoading(false)
+            navigate(from, {replace: true});
         })
         .catch(error => {
             console.log(error)

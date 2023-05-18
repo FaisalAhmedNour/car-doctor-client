@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import CheakOut from "../Pages/CheakOut/CheakOut";
 import Bookings from "../Pages/Bookings/Bookings";
+import PrivetRoutes from "./PrivetRoutes";
 
 const routes = createBrowserRouter([
     {
@@ -26,11 +27,11 @@ const routes = createBrowserRouter([
             {
                 path: "cheakout/:id",
                 element: <CheakOut></CheakOut>,
-                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({ params }) => fetch(`https://car-doctor-server-faisalahmednour.vercel.app/services/${params.id}`)
             },
             {
                 path: "bookings",
-                element: <Bookings></Bookings>
+                element: <PrivetRoutes><Bookings></Bookings></PrivetRoutes>
             }
         ]
     }

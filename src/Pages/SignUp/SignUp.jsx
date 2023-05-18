@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from '../../assets/images/login/login.svg'
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
 
-    const { SignUpWithEmailPassword } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const { SignUpWithEmailPassword, setLoading } = useContext(AuthContext);
     // console.log(SignUpWithEmailPassword)
 
     const handleSubmit = event => {
@@ -25,6 +27,8 @@ const SignUp = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            setLoading(false)
+            navigate('/login')
         })
         .catch(error => {
                 console.log(error);

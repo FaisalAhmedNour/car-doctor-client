@@ -1,13 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Booking from "./Booking";
+import { useLocation } from "react-router-dom";
 
 const Bookings = () => {
 
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
 
-    const url = `http://localhost:5000/bookings?email:${user?.email}`;
+    const location = useLocation();
+    console.log(location)
+
+    const url = `https://car-doctor-server-faisalahmednour.vercel.app/bookings?email:${user?.email}`;
 
     useEffect(() => {
         fetch(url)
@@ -16,12 +20,12 @@ const Bookings = () => {
                 console.log(data)
                 setBookings(data);
             })
-    }, [])
+    }, [url]);
 
     const handleDelete = id => {
         const process = confirm('Delete successful.')
         if (process) {
-            fetch(`http://localhost:5000/bookings/${id}`, {
+            fetch(`https://car-doctor-server-faisalahmednour.vercel.app/bookings/${id}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
